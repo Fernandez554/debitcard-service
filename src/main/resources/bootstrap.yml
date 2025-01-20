@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: debitcard-service
+  cloud:
+    config:
+      uri: http://localhost:9091
+      profile: dev
+      enabled: true
