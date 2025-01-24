@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -56,13 +54,12 @@ public class AccountService {
    * @param feignException the Feign exception to extract the message from.
    * @return the error message.
    */
-  private String extractMessageFromFeignException(FeignException feignException) {
+  public String extractMessageFromFeignException(FeignException feignException) {
     try {
       String responseBody = feignException.contentUTF8();
       JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
       return jsonNode.path("message").asText("An error occurred");
     } catch (IOException ioException) {
-      log.error("Failed to parse error message from FeignException", ioException);
       return "An error occurred";
     }
   }

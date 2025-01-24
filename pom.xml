@@ -183,6 +183,9 @@
         <!--Exclusiones para reporte de cobertura-->
         <configuration>
           <excludes>
+            <exclude>com/nttbank/microservices/debitcardservice/exception/**</exclude>
+            <exclude>com/nttbank/microservices/debitcardservice/config/MongoConfig.class</exclude>
+            <exclude>com/nttbank/microservices/debitcardservice/DebitcardServiceApplication.class</exclude>
           </excludes>
         </configuration>
         <!--Exclusiones para reporte de cobertura-->

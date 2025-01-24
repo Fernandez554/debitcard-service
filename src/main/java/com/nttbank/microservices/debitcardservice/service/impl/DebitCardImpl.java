@@ -55,7 +55,6 @@ public class DebitCardImpl implements DebitCardService {
 
   @Override
   public Mono<DebitCard> addLinkedAccount(String debitCardId, String accountId) {
-    //TODO: account exist or not
     return repo.findById(debitCardId)
         .flatMap(debitCard -> {
           DebitCardUtils.addElementToSet(debitCard, accountId, DebitCard::getLinkedAccounts,

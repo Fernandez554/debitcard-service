@@ -22,9 +22,7 @@ import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import reactor.core.publisher.Mono;
 
-/**
- * Configuration class for setting up Kafka consumer for the Debit Card Service.
- */
+/** Configuration class for setting up Kafka consumer for the Debit Card Service. */
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
@@ -41,9 +39,7 @@ public class KafkaConsumerConfig {
   @Value("${kafka.nttbank.topic.consumer:nttbank}")
   private String topicName;
 
-  /**
-   * Creates and configures the Kafka consumer factory.
-   */
+  /** Creates and configures the Kafka consumer factory. */
   @Bean
   public ConsumerFactory<String, GenericEvent<? extends GenericEvent>> consumerFactory() {
     Map<String, Object> kafkaProperties = new HashMap<>();
@@ -64,9 +60,7 @@ public class KafkaConsumerConfig {
     return new DefaultKafkaConsumerFactory<>(kafkaProperties);
   }
 
-  /**
-   * Creates and configures the Kafka listener container factory.
-   */
+  /** Creates and configures the Kafka listener container factory. */
   @Bean
   public ConcurrentKafkaListenerContainerFactory<String, GenericEvent<?
       extends GenericEvent>> kafkaListenerContainerFactory() {
@@ -76,9 +70,7 @@ public class KafkaConsumerConfig {
     return factory;
   }
 
-  /**
-   * Listens to the Kafka topic and processes the messages.
-   */
+  /** Listens to the Kafka topic and processes the messages. */
   @KafkaListener(topics = "debitcard-service-management-v1")
   public void listenTopic(GenericEvent<? extends GenericEvent> obj) {
     if (obj instanceof TransferDebitCardEvent transfer) {
